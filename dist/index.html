@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PY Guard 🛡️ | تشفير بايثون + ذكاء اصطناعي</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">🛡️ <span class="g">PY</span> <span class="b">Guard</span></div>
+  <div class="sub">تشفير ملفات PY • ذكاء لتشخيص الأخطاء • قسم مدفوع • استضافة مجانية</div>
+  <div class="status"><span id="dot" class="dot"></span><span id="statusTxt">جاري الاتصال...</span>
+    <span id="subBadge" class="badge">مجاني</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="enc">🔒 التشفير</button>
+  <button class="tab" data-tab="ai">🤖 مساعد AI</button>
+  <button class="tab" data-tab="vip">💎 القسم المدفوع</button>
+  <button class="tab" data-tab="host">🌐 الاستضافة</button>
+  <button class="tab" data-tab="contact">📞 تواصل</button>
+</nav>
+
+<main>
+<!-- تشفير -->
+<section id="tab-enc" class="panel active">
+  <h2>🔒 تشفير ملفات بايثون <span class="ext">(.py)</span></h2>
+  <p class="hint">ارفع ملف <b>.py</b> أو الصق الكود، اختر الطريقة، ثم حمّل الملف المشفّر. سريع وقوي — يعمل دون إنترنت.</p>
+  <div class="grid">
+    <div>
+      <label>📁 ملف PY</label>
+      <input type="file" id="fileInput" accept=".py,.txt">
+      <label>أو الصق الكود هنا</label>
+      <textarea id="srcCode" placeholder="print('مرحبا بالعالم')"></textarea>
+      <div class="row">
+        <div class="fld"><label>🔑 كلمة المرور (لوضع Secure)</label><input type="password" id="pw" placeholder="4 أحرف على الأقل"></div>
+        <div class="fld"><label>⚙️ الطريقة</label>
+          <select id="method">
+            <option value="secure">Secure — تشفير بكلمة مرور (الأقوى)</option>
+            <option value="marshal">Marshal — تعتيم سريع</option>
+            <option value="base64">Base64 — تعتيم خفيف</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn g" id="btnEnc">⚡ شفّر الآن</button>
+        <button class="btn b" id="btnDl" disabled>⬇️ تحميل الملف المشفّر</button>
+      </div>
+      <div id="encInfo" class="info"></div>
+    </div>
+    <div>
+      <label>📤 الناتج المشفّر (.py جاهز للتشغيل)</label>
+      <textarea id="outCode" readonly placeholder="سيظهر الكود المشفّر هنا..."></textarea>
+      <label>🔓 فك التشفير (ضع الـ Blob + كلمة المرور)</label>
+      <input id="blobInput" placeholder="الصق الـ Blob المشفر (base64)...">
+      <div class="row"><button class="btn" id="btnDec">🔓 فك التشفير</button></div>
+      <pre id="decOut" class="term"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="tab-ai" class="panel">
+  <h2>🤖 ذكاء اصطناعي لتشخيص الأخطاء <span class="free">مجاني</span></h2>
+  <p class="hint">الصق الكود + رسالة الخطأ (Traceback) واحصل على تشخيص وحل بالعربية فوراً.</p>
+  <label>الكود</label><textarea id="aiCode" placeholder="x = int(input())&#10;print(10 / x)"></textarea>
+  <label>رسالة الخطأ</label><textarea id="aiErr" placeholder="ZeroDivisionError: division by zero"></textarea>
+  <button class="btn g" id="btnAi">🔍 حلّل الخطأ</button>
+  <div id="aiOut" class="card"></div>
+</section>
+
+<!-- VIP -->
+<section id="tab-vip" class="panel">
+  <h2>💎 القسم المدفوع <span class="price">5 كوينات آسياسيل</span></h2>
+  <div class="vipbox">
+    <p>✨ <b>مميزات الاشتراك:</b> ذكاء يصنع أدوات مدفوعة جاهزة + استضافة مجانية داخل التطبيق + أولوية السرعة.</p>
+    <div class="row">
+      <input id="asiacell" placeholder="أدخل كارت آسياسيل (14-16 رقم)">
+      <button class="btn g" id="btnSub">💳 تفعيل الاشتراك</button>
+    </div>
+    <div id="subMsg" class="info"></div>
+    <hr>
+    <h3>🛠️ صانع الأدوات المدفوعة (للمشتركين)</h3>
+    <input id="toolPrompt" placeholder="مثال: اصنع لي فاحص منافذ / مولد كلمات مرور / مشفر ملفات...">
+    <button class="btn b" id="btnGen">⚡ توليد الأداة</button>
+    <pre id="toolOut" class="term"></pre>
+    <button class="btn" id="btnHostTool" disabled>🌐 انشرها استضافة مجانية</button>
+  </div>
+</section>
+
+<!-- hosting -->
+<section id="tab-host" class="panel">
+  <h2>🌐 الاستضافة المجانية <span class="free">للمشتركين</span></h2>
+  <p class="hint">انشر أدواتك داخل التطبيق واحصل على رابط مباشر.</p>
+  <div class="row"><input id="hostName" placeholder="اسم المشروع"><button class="btn g" id="btnHost">🚀 نشر</button>
+  <button class="btn" id="btnList">🔄 تحديث القائمة</button></div>
+  <textarea id="hostCode" placeholder="الصق كود الأداة هنا للنشر..."></textarea>
+  <div id="hostList" class="card"></div>
+</section>
+
+<!-- contact -->
+<section id="tab-contact" class="panel">
+  <h2>📞 تواصل مع المطور</h2>
+  <div class="card center">
+    <div class="big">👨‍💻 المطور</div>
+    <a class="btn b bigbtn" href="https://t.me/FFQPU" target="_blank">✈️ تيليجرام: @FFQPU</a>
+    <p>للدعم • تفعيل الاشتراك • طلبات خاصة • الإبلاغ عن مشاكل</p>
+    <p class="mono">سعر الاشتراك: <b class="g">5 كوينات آسياسيل</b> — أرسل صورة الكارت إلى @FFQPU للتفعيل اليدوي</p>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 PY Guard — أسود × <span class="g">أخضر</span> × <span class="b">أزرق</span> للأمن السيبراني | @FFQPU</footer>
+<script src="app.js"></script>
+</body>
+</html>

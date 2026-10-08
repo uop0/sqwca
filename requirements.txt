@@ -1,0 +1,2 @@
+# PY Guard — stdlib فقط (بدون اعتماديات = أسرع وأقوى)
+# تشغيل: python3 app.py --port 8000
